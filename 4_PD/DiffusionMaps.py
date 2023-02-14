@@ -259,7 +259,7 @@ def op(pyDir, PD):
         cbar = fig.colorbar(sm, cax=ax)
         cbar.ax.tick_params(labelsize=16)
 
-        fig.savefig(os.path.join(outDir,'Fig11_14_PD_%s.pdf' % PD), dpi=600)
+        fig.savefig(os.path.join(pyDir,'_figure_assets_/Fig11_14_PD_%s.pdf' % PD), dpi=600)
         plt.clf()
         
 
@@ -320,7 +320,7 @@ def op(pyDir, PD):
         cbar = fig.colorbar(sm, cax=ax)
         cbar.ax.tick_params(labelsize=16)
 
-        fig.savefig(os.path.join(outDir,'Fig9_PD_%s.pdf' % PD), dpi=600)
+        fig.savefig(os.path.join(pyDir,'_figure_assets_/Fig9_PD_%s.pdf' % PD), dpi=600)
         plt.clf()
         
         
@@ -390,7 +390,7 @@ def op(pyDir, PD):
         cbar = fig.colorbar(sm, cax=ax)
         cbar.ax.tick_params(labelsize=16)
 
-        fig.savefig(os.path.join(outDir,'Fig10_PD_%s.pdf' % PD), dpi=600)
+        fig.savefig(os.path.join(pyDir,'_figure_assets_/Fig10_PD_%s.pdf' % PD), dpi=600)
         plt.clf()
         
         

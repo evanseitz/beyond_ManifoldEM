@@ -13,7 +13,16 @@ First, install [Anaconda](https://docs.anaconda.com/anaconda/install), and with 
 Next, activate this environment via `conda activate beyondMEM`, and install the following packages:
 
 - `pip install numpy`
-- TBD
+- `pip install matplotlib`
+- `pip install scipy`
+- `pip install -U scikit-learn scipy matplotlib`
+- `pip install mrcfile`
+- `pip install latex` #if texlive installed (see below)
+
+LaTex can be additionally installed (e.g. via [TeX Live](https://tug.org/texlive)); if not, syntax for figure generation in these scripts will need to be individually altered. Once these packages are installed within the Anaconda environment, the environment must be initiated each time before running these scripts via the command `conda activate ESPER`. When you are done using the environment, always exit via `conda deactivate`.
+
+### Additional Software:
+In addition to the Anaconda environment detailed above, the [PyMOL](https://pymol.org/2/) and [Chimera](https://www.cgl.ucsf.edu/chimera/) packages may also prove useful if users wish to recreate distance matrices for ACS and EDM files, respectively, and earlier files in our pipeline from scratch.
 
 ### Usage:
 Detailed instructions and comments for all procedures are provided in the code. Within this repository, we have also supplied a sample of pristine data that can be used for reproducing outputs and figures.

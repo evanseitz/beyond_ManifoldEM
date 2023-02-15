@@ -25,7 +25,7 @@ LaTex can be additionally installed (e.g. via [TeX Live](https://tug.org/texlive
 In addition to the Anaconda environment detailed above, the [PyMOL](https://pymol.org/2/) and [Chimera](https://www.cgl.ucsf.edu/chimera/) packages may also prove useful if users wish to recreate distance matrices for ACS and EDM files, respectively, as well as any earlier files in our pipeline from scratch. For the latter, see our [synthetic generation repository](https://github.com/evanseitz/cryoEM_synthetic_generation).
 
 ### Usage:
-Detailed instructions and comments for all procedures are provided in the code. Within this repository, we have also supplied a sample of pristine data that can be used for reproducing outputs and figures.
+Detailed instructions and comments for all procedures are provided in the code. Within this repository, we have also supplied several datasets that can be used for reproducing outputs of our analysis and related figures.
 
 ## Attribution:
 If this code is useful in your work, please cite:

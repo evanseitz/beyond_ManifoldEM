@@ -16,7 +16,7 @@ import scipy
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.ticker import MaxNLocator
 from matplotlib.pyplot import cm
-import GaussianBandwidth
+#import GaussianBandwidth
 
 pyDir = os.path.dirname(os.path.abspath(__file__)) #python file location
 
@@ -29,7 +29,7 @@ plt.rcParams.update({
 #################
 # generate data:
 
-Dist0 = np.load('EDM_SS2_dist.npy')
+Dist0 = np.load('Data_Distances/EDM_SS2_dist.npy')
 m = 400 #number of states
 
 Dist = Dist0[0:m,0:m]*(250**3)
@@ -93,41 +93,10 @@ if 1:
 
 
 # =============================================================================
-# # generate optimal kernel:
+# define optimal kernel:
 # =============================================================================
-if 0: #automated approach
-    logEps = np.arange(-100, 100.2, 0.2) #may need to widen range if a hyperbolic tangent is not captured
-    a0 = 1*(np.random.rand(4,1)-.5)
-    popt, logSumWij, resnorm, R2 = GaussianBandwidth.op(Dist, logEps, a0)
-    
-    def fun(xx, aa0, aa1, aa2, aa3): #fit tanh()
-        F = aa3 + aa2 * np.tanh(aa0 * xx + aa1)
-        return F
-    
-    plt.scatter(logEps, logSumWij, s=1, c='C0', edgecolor='#1f77b4', zorder=.1, label='data')
-    plt.plot(logEps, fun(logEps, popt[0], popt[1], popt[2], popt[3]), c='C1', linewidth=.5, zorder=.2, label='tanh(x)')
-    plt.plot(logEps, popt[0]*popt[2]*(logEps+popt[1]/popt[0]) + popt[3], c='C2', linewidth=.5, zorder=.3, label='slope')
-    plt.axvline(x=-(popt[1] / popt[0]), c='C3', linewidth=.5, label='epsilon')
-    
-    plt.legend(loc='best')
-    plt.xlabel(r'$\mathrm{ln \ \epsilon}$', fontsize=16)
-    plt.ylabel(r'$\mathrm{ln \ \sum_{i,j} \ A_{i,j}}$', fontsize=18, rotation=90)
-    plt.ylim(np.amin(fun(logEps, popt[0], popt[1], popt[2], popt[3]))-1, np.amax(fun(logEps, popt[0], popt[1], popt[2], popt[3]))+1)
-
-    slope = popt[0]*popt[2] #slope of tanh
-    ln_eps = -(popt[1] / popt[0]) #x-axis line through center of tanh
-    eps = np.exp(ln_eps)
-    print('Coefficient of Determination: %s' % R2)
-    print('Slope: %s' % slope) 
-    print('ln(epsilon): %s; epsilon: %s' % (ln_eps, eps))
-    if 0: #plot Gaussian Bandwidth (graph should be a hyperbolic tangent)
-        plt.show()
-    plt.clf()
-    BigEps = False
-    
-else:
-    eps = 2000000
-    BigEps = False
+eps = 2000000
+BigEps = False
 
 
 # =========================================================================

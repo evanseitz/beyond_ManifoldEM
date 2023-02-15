@@ -46,8 +46,8 @@ def op(pyDir, PD):
     # User parameters:
     # =========================================================================
     CTF = False #if using data modified with CTF
-    dataDir = os.path.join(pyDir, 'SS2_PDs_Pristine') #for noiselss datasets
-    SSn = 2 #options: {1 or 2} in 'SS2_PDs_Pristine' for 1 or 2 degrees of freedom
+    dataDir = os.path.join(pyDir, 'SS2_PD_Pristine') #for noiselss datasets
+    SSn = 2 #options: {1 or 2} in 'SS2_PD_Pristine' for 1 or 2 degrees of freedom
 
     outDir = os.path.join(pyDir, 'Data_Distances')
     if not os.path.exists(outDir):

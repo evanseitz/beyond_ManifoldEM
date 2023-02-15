@@ -1,5 +1,5 @@
 # README
-## Figures 9, 10, 11, 14
+## Projection directions (PD): Figures 9, 10, 11, 14
 
 To generate Figures 9, 10, 11 and 14, run the following commands with the proper [Anaconda](https://docs.anaconda.com/anaconda/install) environment sourced:
 

@@ -41,7 +41,7 @@ def op(pyDir, PD):
     # =========================================================================
     groundTruth = True #use GT indices for visualizations; see '0_Data_Inputs/GroundTruth_Indices'
     viewCM = 1 #{1,2, etc.}; if using ground-truth, CM reference frame to use for color map indices
-    SSn = 2 #options: {1 or 2} in 'SS2_PDs_Pristine' for 1 or 2 degrees of freedom
+    SSn = 2 #options: {1 or 2} in 'SS2_PD_Pristine' for 1 or 2 degrees of freedom
     
     # =========================================================================
     # Prepare directories and import files:

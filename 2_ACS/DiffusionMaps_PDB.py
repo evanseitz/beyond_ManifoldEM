@@ -1,4 +1,5 @@
 import sys, os
+sys.dont_write_bytecode = True
 import numpy as np
 from numpy import linalg as LA
 from itertools import permutations, combinations
@@ -25,12 +26,26 @@ plt.rcParams.update({
     "font.serif": ["Times New Roman"],
 })
 
-#################
-# generate data:
 
-Dist = np.load('PDB_SS2_dist.npy')
+Dist = np.load('Data_Distances/PDB_SS2_dist.npy')
 m = 400 #number of PDBs
 
+# =============================================================================
+# User parameters:
+# ============================================================================= 
+if 1:
+    BigEps = True
+    eps = 1000
+    figname = 'largeEps'
+else:
+    BigEps = False
+    eps = .12
+    figname = 'smallEps'
+
+
+# =============================================================================
+# ACS plot used in Figure 8
+# =============================================================================
 if 1: #plot distances of state_01_01 to all others
     fig, ax = plt.subplots()
     ax.scatter(np.linspace(1,m,m), Dist[0,:], s=20, c='white', edgecolor='k', linewidths=.5, zorder=1)
@@ -81,21 +96,7 @@ if 1:
     
     for i in range(Nx):
         for j in range(Ny*tau):
-            CM2_idx[i,j] = binsActual[i][j]     
-            
-
-# =============================================================================
-# # generate optimal kernel:
-# ============================================================================= 
-#use 0.1 for cosines, 10000 for rectilinear
-if 1:
-    eps = 1000
-    BigEps = True
-    figname = 'largeEps'
-else:
-    eps = .12
-    BigEps = False
-    figname = 'smallEps'
+            CM2_idx[i,j] = binsActual[i][j]
 
 
 # =========================================================================
@@ -244,10 +245,11 @@ if 1: #ordered array 2D manifold subspaces
         ax.set_yticks([])
         
         if BigEps is True: #don't hide Legendre-like form
-            if np.abs(np.amax(U[:,v1])) >= np.abs(np.amin(U[:,v1])):
-                ax.set_ylim(-1*np.amax(U[:,v1]),np.amax(U[:,v1]))
+            ylims = ax.get_ylim()
+            if np.abs(ylims[0]) > np.abs(ylims[1]):
+                ax.set_ylim(-1.*np.abs(ylims[0]), np.abs(ylims[0]))
             else:
-                ax.set_ylim(np.amin(U[:,v1]),-1*np.amin(U[:,v1]))
+                ax.set_ylim(-1.*np.abs(ylims[1]), np.abs(ylims[1]))
 
         # CM2 side:
         ax = fig.add_subplot(gs[1, idx_col1])
@@ -260,10 +262,11 @@ if 1: #ordered array 2D manifold subspaces
         ax.set_yticks([])
 
         if BigEps is True: #don't hide Legendre-like form
-            if np.abs(np.amax(U[:,v1])) >= np.abs(np.amin(U[:,v1])):
-                ax.set_ylim(-1*np.amax(U[:,v1]),np.amax(U[:,v1]))
+            ylims = ax.get_ylim()
+            if np.abs(ylims[0]) > np.abs(ylims[1]):
+                ax.set_ylim(-1.*np.abs(ylims[0]), np.abs(ylims[0]))
             else:
-                ax.set_ylim(np.amin(U[:,v1]),-1*np.amin(U[:,v1]))
+                ax.set_ylim(-1.*np.abs(ylims[1]), np.abs(ylims[1]))
         
         # Cartesian-product side:
         ax = fig.add_subplot(gs[0, idx_col2])

@@ -1,5 +1,5 @@
 # README
-## Figures 7, 8
+## Electron density maps (EDM): Figures 7, 8
 
 To generate Figure 7 and assets for Figure 8, run the following commands with the proper [Anaconda](https://docs.anaconda.com/anaconda/install) environment sourced:
 

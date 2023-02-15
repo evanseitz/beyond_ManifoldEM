@@ -1,5 +1,5 @@
 # README
-## Figures 6,8
+## Atomic-coordinate structures (ACS): Figures 6,8
 
 To generate Figure 6 and assets for Figure 8, run the following commands with the proper [Anaconda](https://docs.anaconda.com/anaconda/install) environment sourced:
 

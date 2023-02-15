@@ -33,7 +33,7 @@ m = 400 #number of PDBs
 # =============================================================================
 # User parameters:
 # ============================================================================= 
-if 1:
+if 0:
     BigEps = True
     eps = 1000
     figname = 'largeEps'
@@ -209,7 +209,7 @@ if 0: #eigenfunction analysis
 # All plots used in Figure 6 (repeat for large epsilon regime, and vice versa above)
 # =============================================================================
 if 1: #ordered array 2D manifold subspaces
-    if BigEps is True:    
+    if BigEps is False:    
         dimRows = 4 #keeps proper scale of colorbar for final figure
     else:
         dimRows = 2

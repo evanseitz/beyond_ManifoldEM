@@ -34,13 +34,14 @@ SSn = 2 #options : {1 or 2} for Figure 2 (top) or (bottom), respectively
 Nx=50
 Ny=50
 
-if 0: #Figure 2
+if 1: #Figure 2
     x = np.linspace(0,1.1,Nx) #nondegenerate
     bc = 'rect'
+    rotated = False
 else: #Figure 4 (top)
     x = np.linspace(0,1,Nx)
     bc = 'square'
-    if 1: #counter rotate degenerate eigenspace (Figure 4 LHS/RHS before and after, respectively)
+    if 0: #counter rotate degenerate eigenspace (Figure 4 LHS/RHS before and after, respectively)
         rotated = True
     else: #no counter rotation performed
         rotated = False
@@ -288,6 +289,11 @@ if 1:
         dimRows = 4
         dimCols = 5
     
+        labpadX = 3.25
+        labpadY = 3
+        labsizeX = 18
+        labsizeY = 22
+    
         # hardcoded coordinates for figure subplots
         V1_top = [1,1,1,1,1]
         V2_top = [2,3,4,5,6]
@@ -313,8 +319,8 @@ if 1:
                 ax.scatter(enum, U[:,v1-1], s=s, c='white', linewidths=lw, edgecolor='k', zorder=1)
             if SSn == 1:
                 ax.plot(enum, U[:,v1], c='k', linewidth=1, zorder=-5, alpha=.3)
-            ax.set_xlabel(r'$X$', fontsize=14, labelpad=2.5)
-            ax.set_ylabel(r'$\Psi_{%s}$' % v1, fontsize=18, labelpad=2.5)            
+            ax.set_xlabel(r'$X$', fontsize=labsizeX, labelpad=labpadX)
+            ax.set_ylabel(r'$\Psi_{%s}$' % v1, fontsize=labsizeY, labelpad=labpadY)            
             ax.axes.xaxis.set_ticklabels([])
             ax.axes.yaxis.set_ticklabels([])
             ax.set_xticks([])
@@ -335,8 +341,8 @@ if 1:
                 ax.scatter(enum, U[:,v1+dimCols-1], s=s, c='white', linewidths=lw, edgecolor='k', zorder=1)
             if SSn == 1:
                 ax.plot(enum, U[:,v1+dimCols], c='k', linewidth=1, zorder=-5, alpha=.3)
-            ax.set_xlabel(r'$X$', fontsize=14, labelpad=2.5)
-            ax.set_ylabel(r'$\Psi_{%s}$' % (v1+dimCols), fontsize=18, labelpad=2.5)
+            ax.set_xlabel(r'$X$', fontsize=labsizeX, labelpad=labpadX)
+            ax.set_ylabel(r'$\Psi_{%s}$' % (v1+dimCols), fontsize=labsizeY, labelpad=labpadY)
             ax.axes.xaxis.set_ticklabels([])
             ax.axes.yaxis.set_ticklabels([])
             ax.set_xticks([])
@@ -352,8 +358,8 @@ if 1:
             # Cartesian-product side:
             ax = fig.add_subplot(gs[2, idx_col1])
             ax.scatter(U[:,V1_top[V_idx]], U[:,V2_top[V_idx]], s=s, c='white', linewidths=lw, edgecolor='k', zorder=1)
-            ax.set_xlabel(r'$\Psi_{%s}$' % V1_top[V_idx], fontsize=18, labelpad=2.5)
-            ax.set_ylabel(r'$\Psi_{%s}$' % V2_top[V_idx], fontsize=18, labelpad=2.5)
+            ax.set_xlabel(r'$\Psi_{%s}$' % V1_top[V_idx], fontsize=labsizeY, labelpad=labpadY)
+            ax.set_ylabel(r'$\Psi_{%s}$' % V2_top[V_idx], fontsize=labsizeY, labelpad=labpadY)
             ax.axes.xaxis.set_ticklabels([])
             ax.axes.yaxis.set_ticklabels([])
             ax.set_xticks([])
@@ -361,8 +367,8 @@ if 1:
     
             ax = fig.add_subplot(gs[3, idx_col1])
             ax.scatter(U[:,V1_bot[V_idx]], U[:,V2_bot[V_idx]], s=s, c='white', linewidths=lw, edgecolor='k', zorder=1)
-            ax.set_xlabel(r'$\Psi_{%s}$' % V1_bot[V_idx], fontsize=18, labelpad=2.5)
-            ax.set_ylabel(r'$\Psi_{%s}$' % V2_bot[V_idx], fontsize=18, labelpad=2.5)
+            ax.set_xlabel(r'$\Psi_{%s}$' % V1_bot[V_idx], fontsize=labsizeY, labelpad=labpadY)
+            ax.set_ylabel(r'$\Psi_{%s}$' % V2_bot[V_idx], fontsize=labsizeY, labelpad=labpadY)
             ax.axes.xaxis.set_ticklabels([])
             ax.axes.yaxis.set_ticklabels([])
             ax.set_xticks([])

@@ -4,7 +4,7 @@ from pymol import cmd
 import numpy as np
 
 # =============================================================================
-# PyMOL RMSD Calculator (run via 'pymol PDB_RMSD_Calculator.py') 
+# PyMOL RMSD Calculator (run via 'pymol GetDistances_PDB.py') 
 # Authors:    E. Seitz @ Columbia University - Frank Lab - 2019 
 #             F. Acosta-Reyes @ Columbia University - Frank Lab - 2019
 # =============================================================================
@@ -18,11 +18,17 @@ def calc_rmsd(sel1, sel2):
     cmd.iterate_state( 1, selector.process(sel2), "stored.o2.append([x,y,z])")
     rmst = 0
     for i in range(len(stored.o1)):
-        rmst += (np.square(np.abs(stored.o1[i][0]-stored.o2[i][0])) + np.square(np.abs(stored.o1[i][1]-stored.o2[i][1])) + np.square(np.abs(stored.o1[i][2]-stored.o2[i][2]))) #x,y,z 
+        if 1: #3d RMSD
+            rmst += (np.square(np.abs(stored.o1[i][0]-stored.o2[i][0])) + np.square(np.abs(stored.o1[i][1]-stored.o2[i][1])) + np.square(np.abs(stored.o1[i][2]-stored.o2[i][2]))) #x,y,z 
+        else: #2d RMSD
+            rmst += (np.square(np.abs(stored.o1[i][0]-stored.o2[i][0])) + np.square(np.abs(stored.o1[i][1]-stored.o2[i][1]))) #x,y
+            #rmst += (np.square(np.abs(stored.o1[i][0]-stored.o2[i][0])) + np.square(np.abs(stored.o1[i][2]-stored.o2[i][2]))) #x,z
+            #rmst += (np.square(np.abs(stored.o1[i][1]-stored.o2[i][1])) + np.square(np.abs(stored.o1[i][2]-stored.o2[i][2]))) #y,z
     return np.sqrt(np.divide(rmst,len(stored.o1)))
 
-pyDir = os.getcwd() #python file location, place in '2_GenStates_CM2' (if following synthetic continnum workflow; Seitz)
-CM_dir = os.path.join(pyDir, 'SS2_ACS_Pristine') #location of 400 PDBs (i.e., entire state space)
+pyDir = os.getcwd() #python file location
+parDir = os.path.abspath(os.path.join(pyDir, os.pardir))
+CM_dir = os.path.join(pyDir, 'SS2_ACS_Pristine') #location of all PDBs (i.e., entire state space)
 
 CM_paths = []
 for root, dirs, files in os.walk(CM_dir):
@@ -38,10 +44,12 @@ for CM in CM_paths:
     # for projection direction equivalent in 2d RMSD:
     #cmd.rotate('x', 115, name2)
     #cmd.rotate('y', 80, name2)
+    
+m = len(CM_paths) #total number of states
 
-states = range(1,21) #if 20x20 state space; may need to rewrite if different indexing used
+states = range(1,20) #if 20x20 state space; may need to rewrite if different indexing used
 states = [str(item).zfill(2) for item in states] #leading zeros
-D = np.ndarray(shape=(400,400), dtype=float)
+D = np.ndarray(shape=(m,m), dtype=float)
 
 count1 = 0
 count2 = 0
@@ -55,7 +63,7 @@ for i in states:
                 D[int(count1),int(count2)] = float(calc_rmsd('state_%s_%s' % (i,j), 'state_%s_%s' % (k,l)))
                 print(D[int(count1),int(count2)])
                 count2 += 1
-                if int(k)*int(l) == 400:
+                if int(k)*int(l) == m:
                     count1 += 1
                     count2 = 0
                     

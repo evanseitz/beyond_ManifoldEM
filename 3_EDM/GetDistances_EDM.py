@@ -13,31 +13,34 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.ticker import MaxNLocator
 
 # =============================================================================
-# EDM Distance Calculator (run via 'python GetDistances_EDM.py') 
-# Author:    E. Seitz @ Columbia University - Frank Lab - 2019-2020 
+# Python EDM Distance Calculator (run via 'python GetDistances_EDM.py') 
+# Author:    E. Seitz @ Columbia University - Frank Lab - 2019-2020
+# Contact:   evan.e.seitz@gmail.com
 # =============================================================================
 
 def calc_dist(vol1, vol2):
     dist = LA.norm(vol1 - vol2)
-    return np.divide(dist, np.shape(vol1)[0]**3)
+    #return np.divide(dist, np.shape(vol1)[0]**3)
+    return dist
     
 def natural_sort(l): 
     convert = lambda text: int(text) if text.isdigit() else text.lower() 
     alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ] 
     return sorted(l, key = alphanum_key)
 
-pyDir = os.getcwd() #python file location, place in '2_GenStates_CM2' (if Hsp2D synthetic data)
-CM_dir = os.path.join(pyDir, 'SS2_MRC_Pristine') #location of 400 MRCs (i.e., entire state space)
+pyDir = os.getcwd() #python file location
+parDir = os.path.abspath(os.path.join(pyDir, os.pardir))
+dataDir = os.path.join(pyDir, 'SS2_MRC_Pristine') #location of all MRCs (i.e., entire state space)
 
 MRC_paths0 = []
-for root, dirs, files in os.walk(CM_dir):
+for root, dirs, files in os.walk(dataDir):
     for file in sorted(files):
         if not file.startswith('.'): #ignore hidden files
             if file.endswith(".mrc"):
                 MRC_paths0.append(os.path.join(root, file))               
 MRC_paths = natural_sort(MRC_paths0)
 
-m = 400 #total number of states
+m = len(MRC_paths) #total number of states
 states = range(0,m)
 D = np.zeros(shape=(m,m), dtype=float)
 
@@ -62,7 +65,3 @@ if 1:
     plt.colorbar()
     plt.tight_layout()
     plt.show()
-        
-
-    
-    

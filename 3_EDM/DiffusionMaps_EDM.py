@@ -90,11 +90,11 @@ if 1:
     for i in range(Nx):
         for j in range(Ny*tau):
             CM2_idx[i,j] = binsActual[i][j]     
-# ======================================================================== 
 
-###########################
-# generate optimal kernel:
-    
+
+# =============================================================================
+# # generate optimal kernel:
+# =============================================================================
 if 0: #automated approach
     logEps = np.arange(-100, 100.2, 0.2) #may need to widen range if a hyperbolic tangent is not captured
     a0 = 1*(np.random.rand(4,1)-.5)
@@ -241,8 +241,8 @@ if 0: #eigenfunction analysis
 # All plots used in Figure 7
 # =============================================================================
 if 1: #ordered array 2D manifold subspaces
-    dimRows = 4
-    dimCols = 6
+    dimRows = 2#4
+    dimCols = 10#6
 
     # hardcoded coordinates for figure subplots
     V1_top = [1,1,1,1,1,1]
@@ -254,13 +254,14 @@ if 1: #ordered array 2D manifold subspaces
     widths = []
     for i in range(dimCols):
         widths.append(1)
-    widths.append(.25)
+    widths.append(.2)
     
     fig = plt.figure(figsize=[dimCols*2,dimRows*2], constrained_layout=True)
     gs = GridSpec(dimRows, dimCols+1, left=0.05, right=0.95, wspace=0.3, hspace=0.3, width_ratios=widths)
     
-    idx_col1 = 0    
-    for v1 in range(1,(2*int(dimCols/2)+1)):
+    idx_col1 = 0  
+    idx_col2 = 5
+    for v1 in range(1,6):#(2*int(dimCols/2)+1)):
 
         # CM1 side:
         ax = fig.add_subplot(gs[0, idx_col1])
@@ -283,7 +284,7 @@ if 1: #ordered array 2D manifold subspaces
         ax.set_yticks([])
         
         # Cartesian-product side:
-        ax = fig.add_subplot(gs[2, idx_col1])
+        ax = fig.add_subplot(gs[0, idx_col2])
         ax.scatter(U[:,V1_top[V_idx]], U[:,V2_top[V_idx]], c=np.arange(U.shape[0]), cmap='tab20', s=16, linewidths=.1, edgecolor='k', zorder=1)
         ax.set_xlabel(r'$\Psi_{%s}$' % V1_top[V_idx], fontsize=18, labelpad=2.5)
         ax.set_ylabel(r'$\Psi_{%s}$' % V2_top[V_idx], fontsize=18, labelpad=2.5)
@@ -292,7 +293,7 @@ if 1: #ordered array 2D manifold subspaces
         ax.set_xticks([])
         ax.set_yticks([])
 
-        ax = fig.add_subplot(gs[3, idx_col1])
+        ax = fig.add_subplot(gs[1, idx_col2])
         ax.scatter(U[:,V1_bot[V_idx]], U[:,V2_bot[V_idx]], c=np.arange(U.shape[0]), cmap='tab20', s=16, linewidths=.1, edgecolor='k', zorder=1)
         ax.set_xlabel(r'$\Psi_{%s}$' % V1_bot[V_idx], fontsize=18, labelpad=2.5)
         ax.set_ylabel(r'$\Psi_{%s}$' % V2_bot[V_idx], fontsize=18, labelpad=2.5)
@@ -302,8 +303,8 @@ if 1: #ordered array 2D manifold subspaces
         ax.set_yticks([])
         
         idx_col1 += 1
+        idx_col2 += 1
         V_idx += 1
-
 
     ax = fig.add_subplot(gs[:, dimCols])
     
@@ -314,94 +315,5 @@ if 1: #ordered array 2D manifold subspaces
 
     fig.savefig(os.path.join(pyDir,'_figure_assets_/Fig7.pdf'), dpi=600)
     plt.clf()
-    
-    
-
-            
-'''if 1: #view an organized array of (1D) eigenfunctions  
-    fig = plt.figure()
-    dimRowsTotal = 10 ###4
-    dimCols = 6
-    idx = 1
-    fS = 12 #font size
-    for v1 in range(1,2*dimCols+1):
-        plt.subplot(dimRowsTotal, dimCols, idx)
-        plt.scatter(enum, U[:,v1], s=s, c='white', edgecolor='k', linewidths=lw, zorder=1)
-        #plt.scatter(enum, U[:,v1][Y_idx], s=s, c='white', edgecolor='k', linewidths=lw, zorder=1)
-        #plt.plot(enum, U[:,v1], color='lightgray', linewidth=1, zorder=-1)
-        plt.xlabel(r'$\mathrm{CM_{1}}$', fontsize=fS-.5)
-        plt.ylabel(r'$\Psi_{%s}$' % (v1), fontsize=fS+2, labelpad=2.5)
-        
-        if BigEps is True:
-            #plt.xlim(-1,1)
-            if np.abs(np.amax(U[:,v1])) >= np.abs(np.amin(U[:,v1])) :
-                plt.ylim(-1*np.amax(U[:,v1]),np.amax(U[:,v1]))
-            else:
-                plt.ylim(np.amin(U[:,v1]),-1*np.amin(U[:,v1]))
-        
-        plt.ticklabel_format(style='sci', axis='x', scilimits=(0,0))
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-        plt.rc('font', size=6)
-        if 1:
-            frame = plt.gca()
-            frame.axes.xaxis.set_ticklabels([])
-            frame.axes.yaxis.set_ticklabels([])
-            plt.gca().set_xticks([])
-            plt.xticks([])
-            plt.gca().set_yticks([])
-            plt.yticks([])
-        else:
-            plt.tick_params(axis="x", labelsize=6)
-            plt.tick_params(axis="y", labelsize=6)
-        plt.gca().set_box_aspect(1)
-        idx += 1
-
-    
-
-
-
-
-    dimRows = 8 ###2
-    #dimCols = 6
-    idx = 2*dimCols+1#1
-    for v1 in range(1,dimRows+1):
-        for v2 in range(v1+1, v1+dimCols+1):
-            #print(v1,v2)
-            plt.subplot(dimRowsTotal, dimCols, idx)
-            if 1:#if groundTruth is True:
-                color=iter(cm.tab20(np.linspace(1, 0, np.shape(CM_idx)[0])))
-                for b in range(np.shape(CM_idx)[0]):
-                    c=next(color)
-                    plt.scatter(U[:,v1][CM_idx[b]], U[:,v2][CM_idx[b]], color=c, s=15, edgecolor='k', linewidths=.1, zorder=1)
-                #plt.scatter(U[:,v1], U[:,v2], c=np.arange(1,m+1), cmap=cmap, s=s, linewidths=lw, edgecolor='k') #cmap: 'nipy_spectral', 'gist_rainbow'
-            else:
-                plt.scatter(U[:,v1], U[:,v2], c='white', s=20, linewidths=.5, edgecolor='k', zorder=0)
-            plt.xlabel(r'$\Psi_{%s}$' % (v1), fontsize=fS+2, labelpad=2.5)
-            plt.ylabel(r'$\Psi_{%s}$' % (v2), fontsize=fS+2, labelpad=2.5)
-            plt.ticklabel_format(style='sci', axis='x', scilimits=(0,0))
-            plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0)) 
-            plt.rc('font', size=6)
-            if 1:
-                frame = plt.gca()
-                frame.axes.xaxis.set_ticklabels([])
-                frame.axes.yaxis.set_ticklabels([])
-                plt.gca().set_xticks([])
-                plt.xticks([])
-                plt.gca().set_yticks([])
-                plt.yticks([])
-            else:
-                plt.tick_params(axis="x", labelsize=6)
-                plt.tick_params(axis="y", labelsize=6) 
-
-
-            plt.gca().set_box_aspect(1)
-
-            idx += 1 
-    plt.tight_layout()
-    plt.subplots_adjust(left=0.01, right=0.45, bottom=0.092, top=0.99, wspace=0.26, hspace=0.23)
-    plt.show()
-    #fig = plt.gcf()
-    #fig.savefig(os.path.join(outDir,'Fig_PD_%s.png' % PD), dpi=200)
-    #plt.clf()'''
     
     

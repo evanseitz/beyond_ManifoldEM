@@ -387,7 +387,8 @@ def op(pyDir, PD):
         
         sm = plt.cm.ScalarMappable(cmap=plt.cm.get_cmap(cm.tab20).reversed())
         sm.set_clim(vmin=0, vmax=U.shape[0])
-        cbar = fig.colorbar(sm, cax=ax)
+        cbar = fig.colorbar(sm, cax=ax, ticks=np.linspace(0,20,5))
+
         cbar.ax.tick_params(labelsize=16)
 
         fig.savefig(os.path.join(pyDir,'_figure_assets_/Fig10_PD_%s.pdf' % PD), dpi=600)

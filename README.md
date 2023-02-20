@@ -1,5 +1,5 @@
 # Beyond ManifoldEM
-This repository contains code for generating results shown in our paper **Beyond ManifoldEM: Geometric relationships between manifold embeddings of a continuum of 3D molecular structures and their 2D projections** (Seitz, Frank* and Schwander*): https://www.TBD.com. This work was developed in the Frank research group at Columbia University in collaboration with Peter Schwander at the University of Wisconsin-Milwaukee (UWM).
+This repository contains code for generating results shown in our paper **Beyond ManifoldEM: Geometric relationships between manifold embeddings of a continuum of 3D molecular structures and their 2D projections** (Seitz, Frank* and Schwander*). This work was developed in the Frank research group at Columbia University in collaboration with Peter Schwander at the University of Wisconsin-Milwaukee (UWM).
 
 The algorithms presented here in their current form are developed for analyzing synthetic data. Custom synthetic datasets can be generated using code in our [previous repository](https://github.com/evanseitz/cryoEM_synthetic_continua) with additional information provided in the corresponding [paper](https://www.biorxiv.org/content/10.1101/864116v1): **Simulation of Cryo-EM Ensembles from Atomic Models of Molecules Exhibiting Continuous Conformations** (Seitz, Acosta-Reyes, Schwander, Frank*). We have also deposited our complete synthetic dataset in the [IEEE DataPort](https://ieee-dataport.org/documents/manifoldem-esper-data-and-code-repository), which is a mirror of the 2019 repository with the addition of several refinements for processing the provided data.
 
@@ -25,12 +25,16 @@ LaTex can be additionally installed (e.g. via [TeX Live](https://tug.org/texlive
 In addition to the Anaconda environment detailed above, the [PyMOL](https://pymol.org/2/) and [Chimera](https://www.cgl.ucsf.edu/chimera/) packages may also prove useful if users wish to recreate distance matrices for ACS and EDM files, respectively, as well as any earlier files in our pipeline from scratch. For the latter, see our [synthetic generation repository](https://github.com/evanseitz/cryoEM_synthetic_generation).
 
 ### Usage:
-Detailed instructions and comments for all procedures are provided in the code. Within this repository, we have also supplied several datasets that can be used for reproducing outputs of our analysis and related figures.
+Detailed instructions and comments for all procedures are provided in the code. We have also supplied several pre-generated datasets for reproducing outputs of our analysis and related figures.
 
 ## Attribution:
-If this code is useful in your work, please cite:
+cite one or more of the ChimeraX references, mainly:
 
-TBD ZENODO LINK
+If this research or code is useful in your work, please cite one or more of the ManifoldEM references, mainly:
+
+- (Beyond ManifoldEM: manuscript information TBD)
+- (BeyondManifoldEM: Zenodo information TBD)
+- E. Seitz, F. Acosta-Reyes, S. Maji, P. Schwander and J. Frank, "Recovery of Conformational Continuum From Single-Particle Cryo-EM Images: Optimization of ManifoldEM Informed by Ground Truth," in IEEE Transactions on Computational Imaging, vol. 8, pp. 462-478, 2022, doi: 10.1109/TCI.2022.3174801.
 
 ### License:
 Copyright (C) 2018-2023 Evan Seitz

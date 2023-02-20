@@ -33,7 +33,7 @@ cite one or more of the ChimeraX references, mainly:
 If this research or code is useful in your work, please cite one or more of the ManifoldEM references, mainly:
 
 - (Beyond ManifoldEM: manuscript information TBD)
-- (BeyondManifoldEM: Zenodo information TBD)
+- [![DOI](https://zenodo.org/badge/600524033.svg)](https://zenodo.org/badge/latestdoi/600524033)
 - E. Seitz, F. Acosta-Reyes, S. Maji, P. Schwander and J. Frank, "Recovery of Conformational Continuum From Single-Particle Cryo-EM Images: Optimization of ManifoldEM Informed by Ground Truth," in IEEE Transactions on Computational Imaging, vol. 8, pp. 462-478, 2022, doi: 10.1109/TCI.2022.3174801.
 
 ### License:
